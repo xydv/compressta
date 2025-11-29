@@ -3,33 +3,47 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, Debug)]
 pub struct FetchMediaResponse {
     #[serde(rename = "num_results")]
-    count: usize,
-    items: Vec<Items>,
+    pub count: usize,
+    pub items: Vec<Items>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-struct Items {
+pub struct Items {
+    pub pk: String,
     #[serde(rename = "product_type")]
-    item_type: String,
+    pub item_type: String,
     #[serde(rename = "original_width")]
-    width: usize,
+    pub width: usize,
     #[serde(rename = "original_height")]
-    height: usize,
-    code: String,
+    pub height: usize,
+    pub code: String,
     #[serde(rename = "taken_at")]
-    timestamp: i64,
+    pub timestamp: i64,
     #[serde(rename = "image_versions2")]
-    media: Media,
+    pub media: Media,
+    pub caption: Option<Caption>,
+    pub user: User,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-struct Media {
-    candidates: Vec<Candidate>,
+pub struct Media {
+    pub candidates: Vec<Candidate>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-struct Candidate {
-    width: usize,
-    height: usize,
-    url: String,
+pub struct Candidate {
+    pub width: usize,
+    pub height: usize,
+    pub url: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Caption {
+    pub text: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct User {
+    pub full_name: String,
+    pub username: String,
 }
