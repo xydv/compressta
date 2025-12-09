@@ -13,7 +13,7 @@ pub struct InstagramClient {
 }
 
 impl InstagramClient {
-    pub fn new(session_id: String) -> Result<InstagramClient, Box<dyn Error>> {
+    pub fn new(session_id: &str) -> Result<InstagramClient, Box<dyn Error>> {
         let mut headers = get_default_headers();
         headers.insert(COOKIE, HeaderValue::from_str(&session_id)?);
         let client = ClientBuilder::new().default_headers(headers).build()?;
